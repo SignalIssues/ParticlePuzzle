@@ -12,7 +12,8 @@ export abstract class Particle {
   ) {
     this.sprite = world.add.image(x, y, texture, undefined, options);
     this.sprite.setScale(0.5);
-    (this.sprite as any).instance = this; // for lookup in collisions
+    // Store a reference to the particle via Phaser's data manager
+    this.sprite.setData('instance', this);
   }
 
   abstract update(delta: number): void;
