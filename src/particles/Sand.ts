@@ -1,8 +1,8 @@
 import { Particle } from './Particle';
 
 export class Sand extends Particle {
-  constructor(world: Phaser.Physics.Matter.World, x: number, y: number) {
-    super(world, x, y, 'sandTexture', {
+  constructor(scene: Phaser.Scene, x: number, y: number) {
+    super(scene, x, y, 'sandTexture', {
       shape: { type: 'circle', radius: 4 },
       density: 0.001,
       restitution: 0,

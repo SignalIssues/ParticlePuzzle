@@ -7,7 +7,7 @@ export default class Sandbox extends Phaser.Scene {
     // spawn sand on pointer drag
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
-        new Sand(this.matter.world, ptr.x, ptr.y);
+        new Sand(this, ptr.x, ptr.y);
       }
     });
 
