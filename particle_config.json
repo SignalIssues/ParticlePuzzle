@@ -1,0 +1,7 @@
+{
+    "particles": [
+        {"name": "Water", "colorHex": "#3083ff", "density": 1.0},
+        {"name": "Sand", "colorHex": "#c2b280", "density": 2.0},
+        {"name": "Stone", "colorHex": "#707070", "density": 3.0}
+    ]
+}
