@@ -1,9 +1,13 @@
 import Phaser from 'phaser';
 import { Sand } from '../particles/Sand';
 import InteractionMap from '../utils/InteractionMap';
+import OptionsPanel from '../ui/OptionsPanel';
 
 export default class Sandbox extends Phaser.Scene {
+  private options!: OptionsPanel;
   create() {
+    this.options = new OptionsPanel(this);
+    this.options.init();
     // spawn sand on pointer drag
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
