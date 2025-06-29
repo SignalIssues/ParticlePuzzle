@@ -3,9 +3,11 @@ import Phaser from 'phaser';
 export default class OptionsPanel {
   private floorCheckbox: HTMLInputElement | null;
   private floorBody?: MatterJS.BodyType;
+  private particleSelect: HTMLSelectElement | null;
 
   constructor(private scene: Phaser.Scene) {
     this.floorCheckbox = document.getElementById('floorToggle') as HTMLInputElement | null;
+    this.particleSelect = document.getElementById('particleType') as HTMLSelectElement | null;
   }
 
   init() {
@@ -41,5 +43,9 @@ export default class OptionsPanel {
       this.scene.matter.world.remove(this.floorBody);
       this.floorBody = undefined;
     }
+  }
+
+  getParticleType(): string {
+    return this.particleSelect ? this.particleSelect.value : 'sand';
   }
 }

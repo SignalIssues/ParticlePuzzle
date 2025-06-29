@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import { Sand } from '../particles/Sand';
+import { Water } from '../particles/Water';
+import { Stone } from '../particles/Stone';
 import InteractionMap from '../utils/InteractionMap';
 import OptionsPanel from '../ui/OptionsPanel';
 
@@ -8,10 +10,17 @@ export default class Sandbox extends Phaser.Scene {
   create() {
     this.options = new OptionsPanel(this);
     this.options.init();
-    // spawn sand on pointer drag
+    // spawn selected particle on pointer drag
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
-        new Sand(this, ptr.x, ptr.y);
+        const type = this.options.getParticleType();
+        if (type === 'water') {
+          new Water(this, ptr.x, ptr.y);
+        } else if (type === 'stone') {
+          new Stone(this, ptr.x, ptr.y);
+        } else {
+          new Sand(this, ptr.x, ptr.y);
+        }
       }
     });
 
