@@ -14,12 +14,19 @@ export default class Sandbox extends Phaser.Scene {
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
         const type = this.options.getParticleType();
-        if (type === 'water') {
-          new Water(this, ptr.x, ptr.y);
-        } else if (type === 'stone') {
-          new Stone(this, ptr.x, ptr.y);
-        } else {
-          new Sand(this, ptr.x, ptr.y);
+        const count = this.options.getBrushSize();
+        for (let i = 0; i < count; i++) {
+          const offsetX = Phaser.Math.Between(-count / 2, count / 2);
+          const offsetY = Phaser.Math.Between(-count / 2, count / 2);
+          const x = ptr.x + offsetX;
+          const y = ptr.y + offsetY;
+          if (type === 'water') {
+            new Water(this, x, y);
+          } else if (type === 'stone') {
+            new Stone(this, x, y);
+          } else {
+            new Sand(this, x, y);
+          }
         }
       }
     });
