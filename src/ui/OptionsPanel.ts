@@ -4,10 +4,12 @@ export default class OptionsPanel {
   private floorCheckbox: HTMLInputElement | null;
   private floorBody?: MatterJS.BodyType;
   private particleSelect: HTMLSelectElement | null;
+  private brushSizeInput: HTMLInputElement | null;
 
   constructor(private scene: Phaser.Scene) {
     this.floorCheckbox = document.getElementById('floorToggle') as HTMLInputElement | null;
     this.particleSelect = document.getElementById('particleType') as HTMLSelectElement | null;
+    this.brushSizeInput = document.getElementById('brushSize') as HTMLInputElement | null;
   }
 
   init() {
@@ -47,5 +49,9 @@ export default class OptionsPanel {
 
   getParticleType(): string {
     return this.particleSelect ? this.particleSelect.value : 'sand';
+  }
+
+  getBrushSize(): number {
+    return this.brushSizeInput ? parseInt(this.brushSizeInput.value, 10) || 1 : 1;
   }
 }
