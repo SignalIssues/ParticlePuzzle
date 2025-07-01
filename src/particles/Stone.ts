@@ -14,6 +14,9 @@ export class Stone extends Particle {
   }
 
   update(delta: number) {
-    // custom stone behavior can be added here
+    const height = Number(this.scene.game.config.height);
+    if (this.sprite.y > height * 0.6) {
+      this.sprite.setFixedRotation();
+    }
   }
 }
