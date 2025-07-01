@@ -14,6 +14,9 @@ export class Sand extends Particle {
   }
 
   update(delta: number) {
-    // custom behavior (if any) per frame
+    const height = Number(this.scene.game.config.height);
+    if (this.sprite.y > height * 0.6) {
+      this.sprite.setFixedRotation();
+    }
   }
 }
