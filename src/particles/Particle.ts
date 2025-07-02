@@ -57,5 +57,25 @@ export abstract class Particle {
     this.sprite.setActive(false).setVisible(false);
   }
 
+  applyForce(x: number, y: number) {
+    this.sprite.applyForce({ x, y });
+  }
+
+  getPosition() {
+    return { x: this.sprite.x, y: this.sprite.y };
+  }
+
+  getVelocity() {
+    return {
+      x: (this.sprite.body as MatterJS.BodyType).velocity.x,
+      y: (this.sprite.body as MatterJS.BodyType).velocity.y
+    };
+  }
+
+  setState(x: number, y: number, vx: number, vy: number) {
+    this.sprite.setPosition(x, y);
+    this.sprite.setVelocity(vx, vy);
+  }
+
   abstract update(delta: number): void;
 }
