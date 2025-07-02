@@ -39,8 +39,8 @@ export default class Sandbox extends Phaser.Scene {
       for (let i = 0; i < count; i++) {
         const offsetX = Phaser.Math.Between(-count / 2, count / 2);
         const offsetY = Phaser.Math.Between(-count / 2, count / 2);
-        const x = ptr.x + offsetX;
-        const y = ptr.y + offsetY;
+        const x = ptr.worldX + offsetX;
+        const y = ptr.worldY + offsetY;
         let p: Particle;
         if (type === 'water') {
           p = this.waterPool.spawn(x, y);
