@@ -62,6 +62,7 @@ export default class Sandbox extends Phaser.Scene {
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
         spawnAtPointer(ptr);
+
       }
     });
 
