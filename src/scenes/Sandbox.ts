@@ -33,30 +33,36 @@ export default class Sandbox extends Phaser.Scene {
     this.events.on('reset', this.resetWorld, this);
     this.events.on('pause', () => (this.paused = !this.paused));
     this.events.on('step', () => (this.stepOnce = true));
-    // spawn selected particle on pointer drag
+    const spawnAtPointer = (ptr: Phaser.Input.Pointer) => {
+      const type = this.options.getParticleType();
+      const count = this.options.getBrushSize();
+      for (let i = 0; i < count; i++) {
+        const offsetX = Phaser.Math.Between(-count / 2, count / 2);
+        const offsetY = Phaser.Math.Between(-count / 2, count / 2);
+        const x = ptr.x + offsetX;
+        const y = ptr.y + offsetY;
+        let p: Particle;
+        if (type === 'water') {
+          p = this.waterPool.spawn(x, y);
+        } else if (type === 'stone') {
+          p = this.stonePool.spawn(x, y);
+        } else if (type === 'fire') {
+          p = this.firePool.spawn(x, y);
+        } else if (type === 'plant') {
+          p = this.plantPool.spawn(x, y);
+        } else {
+          p = this.sandPool.spawn(x, y);
+        }
+        this.activeParticles.push(p);
+      }
+    };
+
+    // spawn selected particle on pointer drag or click
+    this.input.on('pointerdown', spawnAtPointer);
     this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
       if (ptr.isDown) {
-        const type = this.options.getParticleType();
-        const count = this.options.getBrushSize();
-        for (let i = 0; i < count; i++) {
-          const offsetX = Phaser.Math.Between(-count / 2, count / 2);
-          const offsetY = Phaser.Math.Between(-count / 2, count / 2);
-          const x = ptr.x + offsetX;
-          const y = ptr.y + offsetY;
-          let p: Particle;
-          if (type === 'water') {
-            p = this.waterPool.spawn(x, y);
-          } else if (type === 'stone') {
-            p = this.stonePool.spawn(x, y);
-          } else if (type === 'fire') {
-            p = this.firePool.spawn(x, y);
-          } else if (type === 'plant') {
-            p = this.plantPool.spawn(x, y);
-          } else {
-            p = this.sandPool.spawn(x, y);
-          }
-          this.activeParticles.push(p);
-        }
+        spawnAtPointer(ptr);
+
       }
     });
 
