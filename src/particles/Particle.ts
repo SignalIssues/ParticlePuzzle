@@ -15,8 +15,8 @@ export abstract class Particle {
   ) {
     this.scene = scene;
     this.sprite = scene.matter.add.image(x, y, texture, undefined, options);
-    // slightly smaller visual scale for all particles
-    this.sprite.setScale(0.3);
+    // Increase scale so particles are easier to see
+    this.sprite.setScale(1);
     // Store a reference to the particle via Phaser's data manager
     this.sprite.setData('instance', this);
   }
